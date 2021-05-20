@@ -73,7 +73,7 @@
    * @param {Number} index 
    */
   var addDumpButton = function (parent, index) {
-      parent.innerHTML += '<input type="button" id="xlsx-' + index + '" value="Download XLSX" />';
+      parent.innerHTML += '&nbsp;<a href="javescript: void(0);" id="xlsx-' + index + '">Download XLSX</a>';
       document.getElementById('xlsx-' + index).addEventListener('click', function () {
         dumpToXlsx();
       }, false);
