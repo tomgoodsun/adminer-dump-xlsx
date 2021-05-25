@@ -6,6 +6,9 @@
 
 Adminer plugin to download selected result into XLSX.
 
+It is available in the pages of default results and SQL results.  
+If multileple selected results are displayed, they are packed in the single file and each result is saved in sheet.
+
 ## How to intall plugin
 
 1. Install Adminer PHP plugin.
@@ -17,6 +20,9 @@ Adminer plugin to download selected result into XLSX.
 ![Adminer Plugin - Dump to XLSX](img/adminer_xlsx.png "Adminer Plugin - Dump to XLSX")
 
 SELECT結果をXLSXにダウンロードするAdminerプラグインです。
+
+デフォルトの結果ページ、SQLの結果ページで利用可能です。  
+複数のSELECT結果がある場合は、それぞれシートに分けて1つのファイルにまとめます。
 
 ## インストール方法
 
