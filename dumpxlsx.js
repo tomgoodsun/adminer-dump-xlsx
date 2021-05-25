@@ -1,3 +1,12 @@
+/**
+ * Adminer plugin
+ * Download select result to XLSX format.
+ * 
+ * Install AdminerDumpXlsx to Adminer,
+ * and place this file on the same level of adminer root file.
+ *
+ * Install to Adminer on http://www.adminer.org/plugins/
+ */
 (function (window, document) {
   /**
    * Create dummy table tag from select result.

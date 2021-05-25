@@ -1,6 +1,7 @@
 <?php
 /**
- * Displays column comment in table header data-listing page
+ * Adminer plugin
+ * Download select result to XLSX format.
  *
  * Install to Adminer on http://www.adminer.org/plugins/
  * @author Tom Higuchi, http://tom-gs.com/
@@ -8,14 +9,25 @@
 
 class AdminerDumpXlsx
 {
+    /**
+     * @var  string
+     */
     private $pathToSheetJs;
+
+    /**
+     * @var string
+     */
     private $pathToFileSaverJs;
+
+    /**
+     * @var string
+     */
     private $pathToDumpXlsxJs;
 
     /**
-     * @param string $pathToSheetJs
-     * @param string $pathToFileSaverJs
-     * @param string $pathtoDumpXlsxJs
+     * @param string|null $pathToSheetJs
+     * @param string|null $pathToFileSaverJs
+     * @param string|null $pathtoDumpXlsxJs
      */
     public function __construct($pathToSheetJs = null, $pathToFileSaverJs = null, $pathToDumpXlsxJs = null)
     {
