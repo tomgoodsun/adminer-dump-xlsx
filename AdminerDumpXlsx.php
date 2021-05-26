@@ -36,10 +36,22 @@ class AdminerDumpXlsx
         $this->pathToDumpXlsxJs = $pathToDumpXlsxJs ?? 'dumpxlsx.js';
     }
 
+    /**
+     * @param string $path
+     * @return string
+     */
+    private function addNonce($path)
+    {
+        if (strpos('?', $path)) {
+            return $path .= '&nonce=' . get_nonce();
+        }
+        return $path .= '?nonce=' . get_nonce();
+    }
+
     public function head()
     {
-        echo script_src($this->pathToSheetJs);
-        echo script_src($this->pathToFileSaverJs);
-        echo script_src($this->pathToDumpXlsxJs);
+        echo script_src($this->addNonce($this->pathToSheetJs));
+        echo script_src($this->addNonce($this->pathToFileSaverJs));
+        echo script_src($this->addNonce($this->pathToDumpXlsxJs));
     }
 }
