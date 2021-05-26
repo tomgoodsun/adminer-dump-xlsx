@@ -1,6 +1,6 @@
 /**
  * Adminer plugin
- * Download select result to XLSX format.
+ * Download select result as XLSX format.
  * 
  * Install AdminerDumpXlsx to Adminer,
  * and place this file on the same level of adminer root file.
@@ -84,14 +84,14 @@
   var addDumpButton = function (parent, index) {
       parent.innerHTML += '&nbsp;<a href="javescript: void(0);" id="xlsx-' + index + '">Download XLSX</a>';
       document.getElementById('xlsx-' + index).addEventListener('click', function () {
-        dumpToXlsx();
+        dumpXlsx();
       }, false);
   };
 
   /**
    * Dump table data to XLSX.
    */
-  var dumpToXlsx = function () {
+  var dumpXlsx = function () {
     var wopts = {
       bookType: 'xlsx',
       bookSST: false,
