@@ -1,10 +1,10 @@
 日本語の説明は下にあります。（Japanese explanation is the below.）
 
-# Adminer Plugin - Dump to XLSX
+# Adminer Plugin - Dump XLSX
 
-![Adminer Plugin - Dump to XLSX](img/adminer_xlsx.png "Adminer Plugin - Dump to XLSX")
+![Adminer Plugin - Dump XLSX](img/adminer_xlsx.png "Adminer Plugin - Dump XLSX")
 
-Adminer plugin to download selected result into XLSX.
+Adminer plugin to download selected result as XLSX.
 
 It is available in the pages of default results and SQL results.  
 If multileple selected results are displayed, they are packed in the single file and each result is saved in sheet.
@@ -17,7 +17,7 @@ If multileple selected results are displayed, they are packed in the single file
 
 # Adminerプラグイン - XLSXダウンロード
 
-![Adminer Plugin - Dump to XLSX](img/adminer_xlsx.png "Adminer Plugin - Dump to XLSX")
+![Adminer Plugin - Dump XLSX](img/adminer_xlsx.png "Adminer Plugin - Dump XLSX")
 
 SELECT結果をXLSXにダウンロードするAdminerプラグインです。
 
