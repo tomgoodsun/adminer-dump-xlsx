@@ -1,7 +1,7 @@
 <?php
 /**
  * Adminer plugin
- * Download select result to XLSX format.
+ * Download select result as XLSX format.
  *
  * Install to Adminer on http://www.adminer.org/plugins/
  * @author Tom Higuchi, http://tom-gs.com/
