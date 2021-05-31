@@ -3,7 +3,7 @@
  * Download select result as XLSX format.
  * 
  * Install AdminerDumpXlsx to Adminer,
- * and place this file on the same level of adminer root file.
+ * and place this file to the plugin directory.
  *
  * Install to Adminer on http://www.adminer.org/plugins/
  */
@@ -82,7 +82,7 @@
    * @param {Number} index 
    */
   var addDumpButton = function (parent, index) {
-      parent.innerHTML += '&nbsp;<a href="javescript: void(0);" id="xlsx-' + index + '">Download XLSX</a>';
+      parent.innerHTML += '&nbsp;<a href="javascript: void(0);" id="xlsx-' + index + '">Download XLSX</a>';
       document.getElementById('xlsx-' + index).addEventListener('click', function () {
         dumpXlsx();
       }, false);

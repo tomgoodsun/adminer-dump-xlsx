@@ -12,7 +12,7 @@ If multileple selected results are displayed, they are packed in the single file
 ## How to intall plugin
 
 1. Install Adminer PHP plugin.
-2. Place `dumpxlsx.js` in the same level of directory that Adminer root programe. (ex. `adminer.php` or `index.php`)
+2. Place `dumpxlsx.js` to the same directory of plugin PHP file.
 3. You can change paths to Sheet JS, FileSaver.js and dumpxlsx.js with arguments of constructor of plugin class.
 
 # Adminerプラグイン - XLSXダウンロード
@@ -30,5 +30,5 @@ https://qiita.com/tomgoodsun/items/0107e5d778b803935fc0
 ## インストール方法
 
 1. PHPファイルのプラグインをインストールしてください。
-2. `dumpxlsx.js`をAdminerが動いているディレクトリと同じ場所に設置してください。 (ex. `adminer.php` or `index.php`)
+2. `dumpxlsx.js`をプラグインと同じディレクトリに配置してください。
 3. プラグインクラスのコンストラクタの引数でJSファイルのパスを変更することができます。
