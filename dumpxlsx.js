@@ -82,10 +82,12 @@
    * @param {Number} index 
    */
   var addDumpButton = function (parent, index) {
-      parent.innerHTML += '&nbsp;<a href="javascript: void(0);" id="xlsx-' + index + '">Download XLSX</a>';
-      document.getElementById('xlsx-' + index).addEventListener('click', function () {
-        dumpXlsx();
-      }, false);
+    var id = 'xlsx-' + index;
+    parent.innerHTML += '&nbsp;<button type="button" id="' + id + '">Download XLSX</button>';
+    var dlBtn = document.getElementById(id);
+    dlBtn.addEventListener('click', function () {
+      dumpXlsx();
+    }, false);
   };
 
   /**
@@ -133,8 +135,6 @@
     var workbook = {SheetNames: [], Sheets: {}};
 
     document.querySelectorAll('table.table-to-export').forEach(function (currentValue, index) {
-
-      // sheet_to_workbook()の実装を参考に記述
       var n = currentValue.getAttribute('data-sheet-name');
       if (!n) {
         n = 'Sheet' + index;
