@@ -31,8 +31,8 @@ class AdminerDumpXlsx
      */
     public function __construct($pathToSheetJs = null, $pathToFileSaverJs = null, $pathToDumpXlsxJs = null)
     {
-        $this->pathToSheetJs = $pathToSheetJs ?? 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.10/xlsx.full.min.js';
-        $this->pathToFileSaverJs = $pathToFileSaverJs ?? 'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js';
+        $this->pathToSheetJs = $pathToSheetJs ?? 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js';
+        $this->pathToFileSaverJs = $pathToFileSaverJs ?? 'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js';
         $this->pathToDumpXlsxJs = $pathToDumpXlsxJs ?? __DIR__ . '/dumpxlsx.js';
     }
 
@@ -52,7 +52,6 @@ class AdminerDumpXlsx
     {
         echo script_src($this->addNonce($this->pathToSheetJs));
         echo script_src($this->addNonce($this->pathToFileSaverJs));
-        printf("<script>\n%s</script>\n", file_get_contents($this->pathToDumpXlsxJs));
-        //echo script_src($this->addNonce($this->pathToDumpXlsxJs));
+        printf("<script%s>\n%s</script>\n", nonce(), file_get_contents($this->pathToDumpXlsxJs));
     }
 }
