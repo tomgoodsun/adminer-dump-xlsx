@@ -6,6 +6,7 @@
  * and place this file to the plugin directory.
  *
  * Install to Adminer on http://www.adminer.org/plugins/
+ * @author Tom Higuchi, http://tom-gs.com/
  */
 (function (window, document) {
   /**
