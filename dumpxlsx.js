@@ -111,7 +111,7 @@
       fileName += location.hostname + '.';
       var date = new Date();
       var format1 = [4, 2, 2];
-      var list1 = [date.getFullYear(), date.getMonth() + 1, date.getDay()];
+      var list1 = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
       var format2 = [2, 2, 2];
       var list2 = [date.getHours(), date.getMinutes(), date.getSeconds()];
       list1.forEach(function (number, index) {
