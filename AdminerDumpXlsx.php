@@ -43,15 +43,15 @@ class AdminerDumpXlsx
     private function addNonce($path)
     {
         if (strpos('?', $path)) {
-            return $path .= '&nonce=' . get_nonce();
+            return $path .= '&nonce=' . Adminer\get_nonce();
         }
-        return $path .= '?nonce=' . get_nonce();
+        return $path .= '?nonce=' . Adminer\get_nonce();
     }
 
     public function head()
     {
-        echo script_src($this->addNonce($this->pathToSheetJs));
-        echo script_src($this->addNonce($this->pathToFileSaverJs));
-        printf("<script%s>\n%s</script>\n", nonce(), file_get_contents($this->pathToDumpXlsxJs));
+        echo Adminer\script_src($this->addNonce($this->pathToSheetJs));
+        echo Adminer\script_src($this->addNonce($this->pathToFileSaverJs));
+        printf("<script%s>\n%s</script>\n", Adminer\nonce(), file_get_contents($this->pathToDumpXlsxJs));
     }
 }
