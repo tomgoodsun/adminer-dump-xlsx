@@ -174,7 +174,7 @@
     var table = document.getElementById('table');
     if (table) {
       div.innerHTML += createDummyTable(table, 'table-0');
-      let parent = document.querySelector('#fieldset-export .fieldset-content'); // Admine Neo
+      let parent = document.querySelector('#fieldset-export .fieldset-content'); // Admin Neo
       if (!parent) {
         parent = document.querySelector('#fieldset-export'); // Adminer
       }
@@ -189,7 +189,7 @@
       var table = sql.nextElementSibling.querySelector('table');
       if (table) {
         div.innerHTML += createDummyTable(table, 'table-' + i);
-        let parent = document.querySelector('#export-' + i + ' p'); // Admine Neo
+        let parent = document.querySelector('#export-' + i + ' p'); // Admin Neo
         if (!parent) {
           parent = document.querySelector('#export-' + i); // Adminer
         }

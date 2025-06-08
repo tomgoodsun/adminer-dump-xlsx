@@ -15,7 +15,7 @@ If multileple selected results are displayed, they are packed in the single file
 2. Place `dumpxlsx.js` to the same directory of plugin PHP file.
 3. You can change paths to Sheet JS, FileSaver.js and dumpxlsx.js with arguments of constructor of plugin class.
 
-## Comptible with Admine Neo
+## Comptible with Admin Neo
 
 1. Place `dumpxlsx.js` to the web directory, for example, the same directory of the `adminneo.php`.
 2. Place the `adminneo-config.php` in the same directory of `adminneo.php` and write the following.
@@ -31,7 +31,7 @@ return [
 ];
 ```
 
-For more details, check [Admine Neo Configuration page](https://www.adminneo.org/configuration#jsUrls).
+For more details, check [Admin Neo Configuration page](https://www.adminneo.org/configuration#jsUrls).
 
 # Adminerプラグイン - XLSX(Excel)ダウンロード
 
@@ -51,7 +51,7 @@ https://qiita.com/tomgoodsun/items/0107e5d778b803935fc0
 2. `dumpxlsx.js`をプラグインと同じディレクトリに配置してください。
 3. プラグインクラスのコンストラクタの引数でJSファイルのパスを変更することができます。
 
-## Admine Neo互換
+## Admin Neo互換
 
 1. `dumpxlsx.js`をウェブディレクトリに配置してください。例えば、`adminneo.php`と同じディレクトリなどに配置してください。
 2. `adminneo-config.php`を作成し、以下のように記述してください。
@@ -67,5 +67,5 @@ return [
 ];
 ```
 
-詳細は[Admine Neo Configurationページ](https://www.adminneo.org/configuration#jsUrls)を参照してください。
+詳細は[Admin Neo Configurationページ](https://www.adminneo.org/configuration#jsUrls)を参照してください。
 
