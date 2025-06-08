@@ -64,7 +64,8 @@
     if ('th' == cell.tagName.toLowerCase()) {
       var ret = cell.id.replace(/th\[(.*)\]/, '$1');
       if (!ret) {
-        ret = cell.getAttribute('title').split('.').slice(-1)[0];
+      	var title = cell.hasAttribute('title') ? cell.getAttribute('title') : '';
+        ret = title.split('.').slice(-1)[0];
       }
       return ret;
     } else if ('td' == cell.tagName.toLowerCase()) {
@@ -84,7 +85,7 @@
    */
   var addDumpButton = function (parent, index) {
     var id = 'xlsx-' + index;
-    parent.innerHTML += '&nbsp;<button type="button" id="' + id + '">Download XLSX</button>';
+    parent.innerHTML += '<button type="button" id="' + id + '" class="button">Download XLSX</button>';
     var dlBtn = document.getElementById(id);
     dlBtn.addEventListener('click', function () {
       dumpXlsx();
@@ -173,7 +174,11 @@
     var table = document.getElementById('table');
     if (table) {
       div.innerHTML += createDummyTable(table, 'table-0');
-      addDumpButton(document.getElementById('fieldset-export'), 0);
+      let parent = document.querySelector('#fieldset-export .fieldset-content'); // Admine Neo
+      if (!parent) {
+        parent = document.querySelector('#fieldset-export'); // Adminer
+      }
+      addDumpButton(parent, 0);
     }
 
     for (var i = 1; ; i++) {
@@ -184,7 +189,11 @@
       var table = sql.nextElementSibling.querySelector('table');
       if (table) {
         div.innerHTML += createDummyTable(table, 'table-' + i);
-        addDumpButton(document.getElementById('export-' + i), i);
+        let parent = document.querySelector('#export-' + i + ' p'); // Admine Neo
+        if (!parent) {
+          parent = document.querySelector('#export-' + i); // Adminer
+        }
+        addDumpButton(parent, i);
       }
     }
   }, false);
