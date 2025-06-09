@@ -95,6 +95,17 @@
   };
 
   /**
+   * Zerofill
+   * 
+   * @param {Number} number
+   * @param {Number} length
+   * @returns {String}
+   */
+  var zerofill = function (number, length) {
+    return ('0'.repeat(length) + ('' + number)).slice(-length);
+  };
+
+  /**
    * Dump table data to XLSX.
    */
   var dumpXlsx = function () {
@@ -112,17 +123,6 @@
       //header: 1,
       //raw: false,
       dateNF: 'yyyy-mm-dd hh:mm:ss'
-    };
-
-    /**
-     * Zerofill
-     * 
-     * @param {Number} number
-     * @param {Number} length
-     * @returns {String}
-     */
-    var zerofill = function (number, length) {
-      return ('0'.repeat(length) + ('' + number)).slice(-length);
     };
 
     /**
