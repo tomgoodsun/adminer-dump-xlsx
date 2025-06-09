@@ -96,10 +96,20 @@
    * Dump table data to XLSX.
    */
   var dumpXlsx = function () {
-    var wopts = {
+    // Options for sheets
+    var wbopts = {
       bookType: 'xlsx',
       bookSST: false,
-      type: 'binary'
+      type: 'binary',
+      cellText: false,
+      cellDates: true
+    };
+
+    // Options for workbook
+    var wsopts = {
+      //header: 1,
+      //raw: false,
+      dateNF: 'yyyy-mm-dd hh:mm:ss'
     };
 
     /**
@@ -142,10 +152,10 @@
         n = 'Sheet' + index;
       }
       workbook.SheetNames.push(n);
-      workbook.Sheets[n] = XLSX.utils.table_to_sheet(currentValue, wopts);
+      workbook.Sheets[n] = XLSX.utils.table_to_sheet(currentValue, wsopts);
     });
   
-    var wbout = XLSX.write(workbook, wopts);
+    var wbout = XLSX.write(workbook, wbopts);
     saveAs(new Blob([s2ab(wbout)], {type: 'application/octet-stream'}), createFileName());
   };
 
