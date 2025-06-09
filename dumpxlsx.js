@@ -17,10 +17,10 @@
    * @returns {String}
    */
   let detectVendor = function () {
-    let a = document.getElementById('version');
-    if (a.href.match(/^https?:\/\/www\.adminer\.org/)) {
+    let url = new URL(document.getElementById('version').href);
+    if (-1 !== url.hostname.indexOf('adminer')) {
       return 'adminer';
-    } else if (a.href.match(/^https?:\/\/www\.adminneo\.org/)) {
+    } else if (-1 !== url.hostname.indexOf('adminneo')) {
       return 'adminneo';
     }
     return 'dbdumpxlsx';
