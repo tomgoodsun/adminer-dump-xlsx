@@ -113,6 +113,17 @@
     };
 
     /**
+     * Zerofill
+     * 
+     * @param {Number} number
+     * @param {Number} length
+     * @returns {String}
+     */
+    var zerofill = function (number, length) {
+      return ('0'.repeat(length) + ('' + number)).slice(-length);
+    };
+
+    /**
      * Create file name for download file.
      * 
      * @returns {String}
@@ -121,25 +132,13 @@
       var fileName = 'adminer.';
       fileName += location.hostname + '.';
       var date = new Date();
-      var format1 = [4, 2, 2];
-      var list1 = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
-      var format2 = [2, 2, 2];
-      var list2 = [date.getHours(), date.getMinutes(), date.getSeconds()];
-      list1.forEach(function (number, index) {
-        number = '' + number;
-        if (format1[index] > number.length) {
-          number = '0' + number;
-        }
-        fileName += '' + number;
-      });
+      fileName += zerofill(date.getFullYear(), 4);
+      fileName += zerofill(date.getMonth() + 1, 2);
+      fileName += zerofill(date.getDate(), 2);
       fileName += '_';
-      list2.forEach(function (number, index) {
-        number = '' + number;
-        if (format2[index] > number.length) {
-          number = '0' + number;
-        }
-        fileName += '' + number;
-      });
+      fileName += zerofill(date.getHours(), 2);
+      fileName += zerofill(date.getMinutes(), 2);
+      fileName += zerofill(date.getSeconds(), 2);
       fileName += '.xlsx';
       return fileName;
     };
