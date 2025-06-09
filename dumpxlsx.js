@@ -14,8 +14,8 @@
    *
    * @returns {String}
    */
-  var detectVendor = function () {
-    var a = document.getElementById('version');
+  let detectVendor = function () {
+    let a = document.getElementById('version');
     if (a.href.match(/^https?:\/\/www\.adminer\.org/)) {
       return 'adminer';
     } else if (a.href.match(/^https?:\/\/www\.adminneo\.org/)) {
@@ -31,18 +31,19 @@
    * @param {String} id 
    * @returns {String}
    */
-  var createDummyTable = function (tblElem, id) {
-    var trs = tblElem.querySelectorAll('tr');
-    var html = '<table id="' + id + '" class="table-to-export" data-sheet-name="' + id + '">';
+  let createDummyTable = function (tblElem, id) {
+    let trs = tblElem.querySelectorAll('tr');
+    let html = `<table id="${id}" class="table-to-export" data-sheet-name="${id}">`;
     trs.forEach(function (tr, index) {
       // Adminer header: td th th th ...
       // Admin Neo header: th th th th ...
+      let tag = '', cells = [];
       if (0 === index) {
-        var tag = 'th';
-        var cells = tr.querySelectorAll('th, td'); // for Adminer use td and ths for header
+        tag = 'th';
+        cells = tr.querySelectorAll('th, td'); // for Adminer use td and ths for header
       } else {
-        var tag = 'td';
-        var cells = tr.querySelectorAll('td');
+        tag = 'td';
+        cells = tr.querySelectorAll('td');
       }
 
       if (cells.length) {
@@ -51,7 +52,7 @@
           if (skipFirstCell(tblElem, index)) {
             return;
           }
-          html += '<' + tag + '>' + getCellValue(td) + '</' + tag + '>';
+          html += `<${tag}>` + getCellValue(td) + `</${tag}>`;
         });
         html += '</tr>';
       }
@@ -67,7 +68,7 @@
    * @param {Number} index 
    * @returns {Boolean}
    */
-  var skipFirstCell = function (tblElem, index) {
+  let skipFirstCell = function (tblElem, index) {
     return 'table' == tblElem.id && 0 === index;
   };
 
@@ -77,16 +78,16 @@
    * @param {HTMLTableElement} cell 
    * @returns {String}
    */
-  var getCellValue = function (cell) {
+  let getCellValue = function (cell) {
     if ('th' == cell.tagName.toLowerCase()) {
-      var ret = cell.id.replace(/th\[(.*)\]/, '$1');
+      let ret = cell.id.replace(/th\[(.*)\]/, '$1');
       if (!ret) {
-      	var title = cell.hasAttribute('title') ? cell.getAttribute('title') : '';
+      	let title = cell.hasAttribute('title') ? cell.getAttribute('title') : '';
         ret = title.split('.').slice(-1)[0];
       }
       return ret;
     } else if ('td' == cell.tagName.toLowerCase()) {
-      var a = cell.querySelector('a');
+      let a = cell.querySelector('a');
       if (a) {
         return a.innerHTML;
       }
@@ -100,10 +101,10 @@
    * @param {HTMLElement} parent 
    * @param {Number} index 
    */
-  var addDumpButton = function (parent, index) {
-    var id = 'xlsx-' + index;
-    parent.innerHTML += '<button type="button" id="' + id + '" class="button">Download XLSX</button>';
-    var dlBtn = document.getElementById(id);
+  let addDumpButton = function (parent, index) {
+    let id = 'xlsx-' + index;
+    parent.innerHTML += `<button type="button" id="${id}" class="button">Download XLSX</button>`;
+    let dlBtn = document.getElementById(id);
     dlBtn.addEventListener('click', function () {
       dumpXlsx();
     }, false);
@@ -116,16 +117,16 @@
    * @param {Number} length
    * @returns {String}
    */
-  var zerofill = function (number, length) {
+  let zerofill = function (number, length) {
     return ('0'.repeat(length) + ('' + number)).slice(-length);
   };
 
   /**
    * Dump table data to XLSX.
    */
-  var dumpXlsx = function () {
+  let dumpXlsx = function () {
     // Options for sheets
-    var wbopts = {
+    let wbopts = {
       bookType: 'xlsx',
       bookSST: false,
       type: 'binary',
@@ -134,7 +135,7 @@
     };
 
     // Options for workbook
-    var wsopts = {
+    let wsopts = {
       //header: 1,
       //raw: false,
       dateNF: 'yyyy-mm-dd hh:mm:ss'
@@ -145,11 +146,11 @@
      * 
      * @returns {String}
      */
-    var createFileName = function () {
-      var fileName = detectVendor() + '.';
+    let createFileName = function () {
+      let fileName = detectVendor() + '.';
       fileName += location.hostname + '.';
 
-      var date = new Date();
+      let date = new Date();
       fileName += zerofill(date.getFullYear(), 4);
       fileName += zerofill(date.getMonth() + 1, 2);
       fileName += zerofill(date.getDate(), 2);
@@ -162,10 +163,10 @@
       return fileName;
     };
   
-    var workbook = {SheetNames: [], Sheets: {}};
+    let workbook = {SheetNames: [], Sheets: {}};
 
     document.querySelectorAll('table.table-to-export').forEach(function (currentValue, index) {
-      var n = currentValue.getAttribute('data-sheet-name');
+      let n = currentValue.getAttribute('data-sheet-name');
       if (!n) {
         n = 'Sheet' + index;
       }
@@ -173,7 +174,7 @@
       workbook.Sheets[n] = XLSX.utils.table_to_sheet(currentValue, wsopts);
     });
   
-    var wbout = XLSX.write(workbook, wbopts);
+    let wbout = XLSX.write(workbook, wbopts);
     saveAs(new Blob([s2ab(wbout)], {type: 'application/octet-stream'}), createFileName());
   };
 
@@ -183,23 +184,23 @@
    * @param {String} s 
    * @returns {ArrayBuffer}
    */
-  var s2ab = function (s) {
-    var buf = new ArrayBuffer(s.length);
-    var view = new Uint8Array(buf);
-    for (var i = 0; i != s.length; ++i) {
+  let s2ab = function (s) {
+    let buf = new ArrayBuffer(s.length);
+    let view = new Uint8Array(buf);
+    for (let i = 0; i != s.length; ++i) {
       view[i] = s.charCodeAt(i) & 0xFF;
     }
     return buf;
   };
 
   window.addEventListener('load', function () {
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.id = 'dummy-table-area';
     div.style.display = 'none';
     div.style.visibility = 'hidden';
     document.body.appendChild(div);
  
-    var table = document.getElementById('table');
+    let table = document.getElementById('table');
     if (table) {
       div.innerHTML += createDummyTable(table, 'table-0');
       let parent = document.querySelector('#fieldset-export .fieldset-content'); // Admin Neo
@@ -209,17 +210,17 @@
       addDumpButton(parent, 0);
     }
 
-    for (var i = 1; ; i++) {
-      var sql = document.getElementById('sql-' + i);
+    for (let i = 1; ; i++) {
+      let sql = document.getElementById(`sql-${i}`);
       if (!sql) {
         break;
       }
-      var table = sql.nextElementSibling.querySelector('table');
+      let table = sql.nextElementSibling.querySelector('table');
       if (table) {
-        div.innerHTML += createDummyTable(table, 'table-' + i);
-        let parent = document.querySelector('#export-' + i + ' p'); // Admin Neo
+        div.innerHTML += createDummyTable(table, `table-${i}`);
+        let parent = document.querySelector(`#export-${i} p`); // Admin Neo
         if (!parent) {
-          parent = document.querySelector('#export-' + i); // Adminer
+          parent = document.querySelector(`#export-${i}`); // Adminer
         }
         addDumpButton(parent, i);
       }
