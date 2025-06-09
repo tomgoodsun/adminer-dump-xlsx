@@ -10,6 +10,21 @@
  */
 (function (window, document) {
   /**
+   * Detect Adminer or Admin Neo
+   *
+   * @returns {String}
+   */
+  var detectVendor = function () {
+    var a = document.getElementById('version');
+    if (a.href.match(/^https?:\/\/www\.adminer\.org/)) {
+      return 'adminer';
+    } else if (a.href.match(/^https?:\/\/www\.adminneo\.org/)) {
+      return 'adminneo';
+    }
+    return 'dbdumpxlsx';
+  };
+
+  /**
    * Create dummy table tag from select result.
    * 
    * @param {HTMLTableElement} tblElem 
@@ -131,8 +146,9 @@
      * @returns {String}
      */
     var createFileName = function () {
-      var fileName = 'adminer.';
+      var fileName = detectVendor() + '.';
       fileName += location.hostname + '.';
+
       var date = new Date();
       fileName += zerofill(date.getFullYear(), 4);
       fileName += zerofill(date.getMonth() + 1, 2);
@@ -142,6 +158,7 @@
       fileName += zerofill(date.getMinutes(), 2);
       fileName += zerofill(date.getSeconds(), 2);
       fileName += '.xlsx';
+
       return fileName;
     };
   
