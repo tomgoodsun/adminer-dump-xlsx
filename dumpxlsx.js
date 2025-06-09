@@ -9,6 +9,8 @@
  * @author Tom Higuchi, http://tom-gs.com/
  */
 (function (window, document) {
+  let vendorName = null;
+
   /**
    * Detect Adminer or Admin Neo
    *
@@ -22,6 +24,28 @@
       return 'adminneo';
     }
     return 'dbdumpxlsx';
+  };
+
+  /**
+   * Get Adminer or Admin Neo
+   *
+   * @returns {String}
+   */
+  let getVendorName = function () {
+    if (null === vendorName) {
+      vendorName = detectVendor();
+    }
+    return vendorName;
+  };
+
+  /**
+   * Adminer or not
+   *
+   *
+   * @returns {Boolean}
+   */
+  let isAdminer = function () {
+    return 'adminer' == getVendorName();
   };
 
   /**
@@ -103,7 +127,11 @@
    */
   let addDumpButton = function (parent, index) {
     let id = 'xlsx-' + index;
-    parent.innerHTML += `<button type="button" id="${id}" class="button">Download XLSX</button>`;
+
+    // Placing space before download button on Adminer is much better
+    let space = isAdminer() ? '&nbsp;' : '';
+
+    parent.innerHTML += `${space}<button type="button" id="${id}" class="button">Download XLSX</button>`;
     let dlBtn = document.getElementById(id);
     dlBtn.addEventListener('click', function () {
       dumpXlsx();
@@ -147,7 +175,7 @@
      * @returns {String}
      */
     let createFileName = function () {
-      let fileName = detectVendor() + '.';
+      let fileName = getVendorName() + '.';
       fileName += location.hostname + '.';
 
       let date = new Date();
