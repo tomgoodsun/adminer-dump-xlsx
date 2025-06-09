@@ -235,11 +235,11 @@
   };
 
   /**
-   * Propess select result.
+   * Create dummy table for select result page.
    *
    * @param {HTMLDivElement} div
    */
-  let processSelectResult = function (div) {
+  let createDummyTableForSelectResultPage = function (div) {
     let table = document.getElementById('table');
     if (table) {
       div.innerHTML += createDummyTable(table, 'table-0');
@@ -249,11 +249,11 @@
   };
 
   /**
-   * Propess SQL result.
+   * Create dummy tables for SQL result page.
    *
    * @param {HTMLDivElement} div
    */
-  let processSqlResult = function (div) {
+  let createDummyTablesForSqlResultPage = function (div) {
     for (let i = 1; ; i++) {
       let sql = document.getElementById(`sql-${i}`);
       if (!sql) {
@@ -275,8 +275,8 @@
     div.style.visibility = 'hidden';
     document.body.appendChild(div);
 
-    processSelectResult(div);
-    processSqlResult(div);
+    createDummyTableForSelectResultPage(div);
+    createDummyTablesForSqlResultPage(div);
   }, false);
 
 })(window, window.document);
