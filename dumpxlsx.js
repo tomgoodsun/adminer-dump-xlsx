@@ -50,9 +50,9 @@
 
   /**
    * Create dummy table tag from select result.
-   * 
-   * @param {HTMLTableElement} tblElem 
-   * @param {String} id 
+   *
+   * @param {HTMLTableElement} tblElem
+   * @param {String} id
    * @returns {String}
    */
   let createDummyTable = function (tblElem, id) {
@@ -87,9 +87,9 @@
 
   /**
    * Check if the skippable cell or not.
-   * 
-   * @param {HTMLTableElement} tblElem 
-   * @param {Number} index 
+   *
+   * @param {HTMLTableElement} tblElem
+   * @param {Number} index
    * @returns {Boolean}
    */
   let skipFirstCell = function (tblElem, index) {
@@ -97,9 +97,9 @@
   };
 
   /**
-   * Get plain value in cell. 
-   * 
-   * @param {HTMLTableElement} cell 
+   * Get plain value in cell.
+   *
+   * @param {HTMLTableElement} cell
    * @returns {String}
    */
   let getCellValue = function (cell) {
@@ -121,9 +121,9 @@
 
   /**
    * Add dump button.
-   * 
-   * @param {HTMLElement} parent 
-   * @param {Number} index 
+   *
+   * @param {HTMLElement} parent
+   * @param {Number} index
    */
   let addDumpButton = function (parent, index) {
     let id = 'xlsx-' + index;
@@ -140,7 +140,7 @@
 
   /**
    * Zerofill
-   * 
+   *
    * @param {Number} number
    * @param {Number} length
    * @returns {String}
@@ -171,7 +171,7 @@
 
     /**
      * Create file name for download file.
-     * 
+     *
      * @returns {String}
      */
     let createFileName = function () {
@@ -190,7 +190,7 @@
 
       return fileName;
     };
-  
+
     let workbook = {SheetNames: [], Sheets: {}};
 
     document.querySelectorAll('table.table-to-export').forEach(function (currentValue, index) {
@@ -201,15 +201,15 @@
       workbook.SheetNames.push(n);
       workbook.Sheets[n] = XLSX.utils.table_to_sheet(currentValue, wsopts);
     });
-  
+
     let wbout = XLSX.write(workbook, wbopts);
     saveAs(new Blob([s2ab(wbout)], {type: 'application/octet-stream'}), createFileName());
   };
 
   /**
    * Convert string to ArrayBuffer.
-   * 
-   * @param {String} s 
+   *
+   * @param {String} s
    * @returns {ArrayBuffer}
    */
   let s2ab = function (s) {
@@ -221,23 +221,41 @@
     return buf;
   };
 
-  window.addEventListener('load', function () {
-    let div = document.createElement('div');
-    div.id = 'dummy-table-area';
-    div.style.display = 'none';
-    div.style.visibility = 'hidden';
-    document.body.appendChild(div);
- 
+  /**
+   * Detect parent element for export button.
+   *
+   * @param {String} selector1
+   * @param {String} selector2
+   * @returns HTMLElement|null
+   */
+  let detectParent = function (selector1, selector2) {
+    let parent = document.querySelector(selector1);
+    if (!parent) {
+      parent = document.querySelector(selector2);
+    }
+    return parent;
+  };
+
+  /**
+   * Propess select result.
+   *
+   * @param {HTMLDivElement} div
+   */
+  let processSelectResult = function (div) {
     let table = document.getElementById('table');
     if (table) {
       div.innerHTML += createDummyTable(table, 'table-0');
-      let parent = document.querySelector('#fieldset-export .fieldset-content'); // Admin Neo
-      if (!parent) {
-        parent = document.querySelector('#fieldset-export'); // Adminer
-      }
+      let parent = detectParent('#fieldset-export .fieldset-content', '#fieldset-export'); // Admin Neo, Adminer
       addDumpButton(parent, 0);
     }
+  };
 
+  /**
+   * Propess SQL result.
+   *
+   * @param {HTMLDivElement} div
+   */
+  let processSqlResult = function (div) {
     for (let i = 1; ; i++) {
       let sql = document.getElementById(`sql-${i}`);
       if (!sql) {
@@ -246,12 +264,21 @@
       let table = sql.nextElementSibling.querySelector('table');
       if (table) {
         div.innerHTML += createDummyTable(table, `table-${i}`);
-        let parent = document.querySelector(`#export-${i} p`); // Admin Neo
-        if (!parent) {
-          parent = document.querySelector(`#export-${i}`); // Adminer
-        }
+        let parent = detectParent(`#export-${i} p`, `#export-${i}`); // Admin Neo, Adminer
         addDumpButton(parent, i);
       }
     }
+  };
+
+  window.addEventListener('load', function () {
+    let div = document.createElement('div');
+    div.id = 'dummy-table-area';
+    div.style.display = 'none';
+    div.style.visibility = 'hidden';
+    document.body.appendChild(div);
+
+    processSelectResult(div);
+    processSqlResult(div);
   }, false);
+
 })(window, window.document);
