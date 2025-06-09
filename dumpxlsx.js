@@ -1,7 +1,7 @@
 /**
  * Adminer plugin
  * Download select result as XLSX format.
- * 
+ *
  * Install AdminerDumpXlsx to Adminer,
  * and place this file to the plugin directory.
  *
@@ -61,14 +61,12 @@
     trs.forEach(function (tr, index) {
       // Adminer header: td th th th ...
       // Admin Neo header: th th th th ...
-      let tag = '', cells = [];
+      let tag = 'td', selector = 'td', cells = [];
       if (0 === index) {
         tag = 'th';
-        cells = tr.querySelectorAll('th, td'); // for Adminer use td and ths for header
-      } else {
-        tag = 'td';
-        cells = tr.querySelectorAll('td');
+        selector = 'th, td'; // for Admin Neo use th and td for header
       }
+      cells = tr.querySelectorAll(selector);
 
       if (cells.length) {
         html += '<tr>';
