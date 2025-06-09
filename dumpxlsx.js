@@ -19,22 +19,24 @@
   var createDummyTable = function (tblElem, id) {
     var trs = tblElem.querySelectorAll('tr');
     var html = '<table id="' + id + '" class="table-to-export" data-sheet-name="' + id + '">';
-    trs.forEach(function (tr) {
-      var ths = tr.querySelectorAll('th');
-      var tds = tr.querySelectorAll('td');
-      if (ths.length) {
+    trs.forEach(function (tr, index) {
+      // Adminer header: td th th th ...
+      // Admin Neo header: th th th th ...
+      if (0 === index) {
+        var tag = 'th';
+        var cells = tr.querySelectorAll('th, td'); // for Adminer use td and ths for header
+      } else {
+        var tag = 'td';
+        var cells = tr.querySelectorAll('td');
+      }
+
+      if (cells.length) {
         html += '<tr>';
-        ths.forEach(function (th, index) {
-          html += '<th>' + getCellValue(th) + '</th>';
-        });
-        html += '</tr>';
-      } else if (tds.length) {
-        html += '<tr>';
-        tds.forEach(function (td, index) {
+        cells.forEach(function (td, index) {
           if (skipFirstCell(tblElem, index)) {
             return;
           }
-          html += '<td>' + getCellValue(td) + '</td>';
+          html += '<' + tag + '>' + getCellValue(td) + '</' + tag + '>';
         });
         html += '</tr>';
       }
