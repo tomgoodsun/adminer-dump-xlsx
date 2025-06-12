@@ -148,6 +148,28 @@
   };
 
   /**
+   * Create file name for download file.
+   *
+   * @returns {String}
+   */
+  let createFileName = function () {
+    let fileName = getVendorName() + '.';
+    fileName += location.hostname + '.';
+
+    let date = new Date();
+    fileName += zerofill(date.getFullYear(), 4);
+    fileName += zerofill(date.getMonth() + 1, 2);
+    fileName += zerofill(date.getDate(), 2);
+    fileName += '_';
+    fileName += zerofill(date.getHours(), 2);
+    fileName += zerofill(date.getMinutes(), 2);
+    fileName += zerofill(date.getSeconds(), 2);
+    fileName += '.xlsx';
+
+    return fileName;
+  };
+
+  /**
    * Dump table data to XLSX.
    */
   let dumpXlsx = function () {
@@ -165,28 +187,6 @@
       //header: 1,
       //raw: false,
       dateNF: 'yyyy-mm-dd hh:mm:ss'
-    };
-
-    /**
-     * Create file name for download file.
-     *
-     * @returns {String}
-     */
-    let createFileName = function () {
-      let fileName = getVendorName() + '.';
-      fileName += location.hostname + '.';
-
-      let date = new Date();
-      fileName += zerofill(date.getFullYear(), 4);
-      fileName += zerofill(date.getMonth() + 1, 2);
-      fileName += zerofill(date.getDate(), 2);
-      fileName += '_';
-      fileName += zerofill(date.getHours(), 2);
-      fileName += zerofill(date.getMinutes(), 2);
-      fileName += zerofill(date.getSeconds(), 2);
-      fileName += '.xlsx';
-
-      return fileName;
     };
 
     let workbook = {SheetNames: [], Sheets: {}};
