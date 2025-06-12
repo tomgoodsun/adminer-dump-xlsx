@@ -5,8 +5,8 @@
  * Install AdminerDumpXlsx to Adminer,
  * and place this file to the plugin directory.
  *
- * Install to Adminer on http://www.adminer.org/plugins/
- * @author Tom Higuchi, http://tom-gs.com/
+ * Install to Adminer on https://www.adminer.org/plugins/
+ * @author Tom Higuchi, https://tom-gs.com/
  */
 (function (window, document) {
   let vendorName = null;
